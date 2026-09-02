@@ -22,6 +22,13 @@
     background-color: blue;
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vw;
+    background-color: rgb(0, 128, 0);
+}
+
 main {
     flex: 1;
     display: flex;
