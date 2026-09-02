@@ -1,73 +1,128 @@
-* {
-    margin: 0;
-    padding: 0;
+/* Variáveis para padronização de cores e medidas */
+:root {
+  --cor-cabecalho: #e63946;
+  --cor-fundo: #f5f2f2;
+  --cor-rodape: #1d3557;
+  --cor-texto-claro: #ffffff;
+  --sombra-padrao: 0 6px 12px rgba(0, 0, 0, 0.15);
+  --tempo-transicao: 0.6s;
 }
 
-.cabecalho {
-    padding: 15px 25px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: red;
-}
-
-.cartao {
-    width: 100%;
-}
-
-.cartao-imagem {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vw;
-    background-color: blue;
+/* Reset Global */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vw;
-    background-color: rgb(0, 128, 0);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--cor-fundo);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-main {
-    flex: 1;
-    display: flex;
-    flex-direction: column-reverse;
-    align-items: center;
+/* Estrutura Principal */
+.cabecalho {
+  padding: 15px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--cor-cabecalho);
 }
 
 .cabecalho-link {
-    color: #fff;
-    text-decoration: none;
+  color: var(--cor-texto-claro);
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.cabecalho-link:hover {
+  opacity: 0.8;
 }
 
 h1 {
-    color: #fff;
-    font-size: 24px;
+  color: var(--cor-texto-claro);
+  font-size: 1.5rem;
 }
 
-footer{
-    background-color: black;
-    padding: 15px 25px;
-    color: #fff;
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  padding: 20px;
+}
+
+section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* Componente Cartão (3D Flip) */
+.cartao {
+  width: 100%;
+  max-width: 300px;
+  height: 400px;
+  perspective: 1000px; /* Necessário para efeito 3D realista */
+  cursor: pointer;
 }
 
 .cartao-interno {
-    position: relative;
-    transform-style: preserve-3d;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform var(--tempo-transicao) ease-in-out;
+  transform-style: preserve-3d;
 }
+
 .cartao:hover .cartao-interno {
-    transform: rotateY(180deg);
+  transform: rotateY(180deg);
 }
-.cartao-frente, .cartao-verso {
-    position: absolute;
-    border-radius: 0 6px 12px rgba(0, 0, 0, 0.15);
-    backface-visibility: hidden;
-}
+
+.cartao-frente,
 .cartao-verso {
-    transform: rotate(180deg);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  border-radius: 8px;
+  box-shadow: var(--sombra-padrao);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden; /* Suporte para Safari */
+  overflow: hidden;
 }
-section {
-    display: flex;
-    gap: 16px;
+
+.cartao-frente {
+  background-color: #ffffff;
+}
+
+.cartao-verso {
+  background-color: #2b2d42;
+  color: var(--cor-texto-claro);
+  transform: rotateY(180deg);
+}
+
+.cartao-imagem {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: #457b9d;
+}
+
+/* Rodapé */
+footer {
+  background-color: var(--cor-rodape);
+  padding: 15px 25px;
+  color: var(--cor-texto-claro);
+  text-align: center;
 }
